@@ -16,6 +16,8 @@
 
 package sample.actuator;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -23,18 +25,35 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import sample.actuator.sample.ServiceProperties;
+import sample.actuator.service.TokenService;
 
 @SpringBootApplication
 @EnableConfigurationProperties(ServiceProperties.class)
+@Slf4j
 public class SampleActuatorApplication {
 
+	@Autowired
+	private TokenService tokenService;
+
+
+
+
 	public static void main(String[] args) {
+
+
+
+
+
+		
 		SpringApplication.run(SampleActuatorApplication.class, args);
+
 	}
 
 	@Bean
 	public HealthIndicator helloHealthIndicator() {
+		log.info("this {}",tokenService.generatetoken());
 		return new HealthIndicator() {
+			
 
 			@Override
 			public Health health() {

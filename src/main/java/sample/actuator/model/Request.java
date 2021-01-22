@@ -36,10 +36,22 @@ public class Request {
     private String trxtype ;
     @JsonIgnore
     private String trxconfirm;
+    @JsonIgnore
+    private String status;
 
 
     @OneToOne(fetch= FetchType.LAZY)
     private RequestDetails requestDetails;
 
-
+    public Request(LocalDateTime time, String clientid, String key, String branchid, String counterid, String producttype, String trxtype, String trxconfirm, String status) {
+        this.time = time;
+        this.clientid = clientid;
+        this.key = key;
+        this.branchid = branchid;
+        this.counterid = counterid;
+        this.producttype = producttype;
+        this.trxtype = trxtype;
+        this.trxconfirm = trxconfirm;
+        this.status = status;
+    }
 }

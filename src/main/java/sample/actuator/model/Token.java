@@ -6,13 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Transactional
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ResponseDetails {
-    private String trxconfirm;
+public class Token {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String token;
+
 }
