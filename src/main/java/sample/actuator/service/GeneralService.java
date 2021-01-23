@@ -38,6 +38,9 @@ public class GeneralService {
 
     @Transactional
     public Response general(Request request_income){
+        Request request = new Request(request_income.getTime(),request_income.getClientid(),request_income.getKey(),
+                request_income.getBranchid(),request_income.getCounterid(),request_income.getProducttype(),request_income.getTrxtype(),
+                null,null);
         Response response = new Response();
         response.setTime(request_income.getTime());
         response.setClientid(request_income.getClientid());
@@ -47,10 +50,9 @@ public class GeneralService {
         response.setProducttype(request_income.getProducttype());
         response.setTrxtype(request_income.getTrxtype());
 
+
+
         if(request_income.getTrxtype().contains("CASHOUT")){
-            Request request = new Request(request_income.getTime(),request_income.getClientid(),request_income.getKey(),
-                    request_income.getBranchid(),request_income.getCounterid(),request_income.getProducttype(),request_income.getTrxtype(),
-                    null,null);
             RequestDetails requestDetails = reqDetailJpa.findBytoken(request_income.getRequestDetails()
                     .getToken());
             if(requestDetails.getRequest()==null){
@@ -76,6 +78,20 @@ public class GeneralService {
             }
 
         }else if(request_income.getTrxtype().contains("REVERSAL")){
+            RequestDetails requestDetails = reqDetailJpa.findBytoken(request_income.getRequestDetails()
+                    .getToken());
+            log.info("this reqde {}",requestDetails);
+            log.info("this reqde {}",requestDetails.getRequest());
+            request.setStatus("reversal");
+            log.info("this rednow {}",request);
+
+            Request request1 = requestDetails.getRequest();
+            request1.setStatus("reversal");
+
+
+
+//            em.merge(request);
+
             response.setRespondetail("succes ");
             response.setResponcode("00");
         }else if(request_income.getTrxtype().contains("NOTIFICATION")){

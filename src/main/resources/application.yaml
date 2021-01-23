@@ -22,16 +22,24 @@ spring:
       repositories:
         bootstrap-mode: default
 
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        stat: OFF
+#    org.apache.kafka: OFF
+#    org.springframework: OFF
+#    sample.actuator: INFO
+#  pattern:
+#    console: "%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"
+#    file: "%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"
+#  file:
+#    name: ${LOG_LOCATION:./logs/transaction.log}
 logging:
-  level:
-    org:
-      hibernate:
-        stat: OFF
-    org.apache.kafka: OFF
-    org.springframework: OFF
-    sample.actuator: INFO
+  file: logs/application-debug.log
   pattern:
-    console: "%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"
-    file: "%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"
-  file:
-    name: ${LOG_LOCATION:./logs/transaction.log}
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    org.springframework.web: ERROR
+    org.hibernate: ERROR

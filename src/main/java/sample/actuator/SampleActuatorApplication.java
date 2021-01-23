@@ -39,27 +39,17 @@ public class SampleActuatorApplication {
 
 
 	public static void main(String[] args) {
-
-
-
-
-
-		
 		SpringApplication.run(SampleActuatorApplication.class, args);
-
 	}
 
 	@Bean
 	public HealthIndicator helloHealthIndicator() {
 		log.info("this {}",tokenService.generatetoken());
 		return new HealthIndicator() {
-			
-
 			@Override
 			public Health health() {
 				return Health.up().withDetail("hello", "world").build();
 			}
-
 		};
 	}
 
