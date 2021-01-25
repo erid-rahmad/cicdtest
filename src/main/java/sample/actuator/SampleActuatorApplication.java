@@ -34,10 +34,6 @@ public class SampleActuatorApplication {
 
 	@Autowired
 	private TokenService tokenService;
-
-
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(SampleActuatorApplication.class, args);
 	}

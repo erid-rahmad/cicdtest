@@ -1,7 +1,10 @@
 package sample.actuator.service;
 
+import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.transaction.annotation.Transactional;
 import sample.actuator.entity.ReqDetailJpa;
 import sample.actuator.entity.ReqJpa;
@@ -12,6 +15,8 @@ import sample.actuator.model.ResponseDetails;
 
 import javax.persistence.EntityManager;
 
+import java.io.FileReader;
+import java.util.Iterator;
 import java.util.Random;
 
 @org.springframework.stereotype.Service
@@ -29,13 +34,6 @@ public class GeneralService {
 
     Random rand = new Random();
 
-
-    public ResponseDetails findById(Long id) {
-        return em.find(ResponseDetails.class,id);
-    }
-
-
-
     @Transactional
     public Response general(Request request_income){
         Request request = new Request(request_income.getTime(),request_income.getClientid(),request_income.getKey(),
@@ -49,6 +47,8 @@ public class GeneralService {
         response.setCounterid(request_income.getCounterid());
         response.setProducttype(request_income.getProducttype());
         response.setTrxtype(request_income.getTrxtype());
+
+        readfile();
 
 
 
@@ -76,22 +76,12 @@ public class GeneralService {
                 response.setRespondetail("gagal");
                 response.setResponcode("05");
             }
-
         }else if(request_income.getTrxtype().contains("REVERSAL")){
             RequestDetails requestDetails = reqDetailJpa.findBytoken(request_income.getRequestDetails()
                     .getToken());
-            log.info("this reqde {}",requestDetails);
-            log.info("this reqde {}",requestDetails.getRequest());
             request.setStatus("reversal");
-            log.info("this rednow {}",request);
-
             Request request1 = requestDetails.getRequest();
             request1.setStatus("reversal");
-
-
-
-//            em.merge(request);
-
             response.setRespondetail("succes ");
             response.setResponcode("00");
         }else if(request_income.getTrxtype().contains("NOTIFICATION")){
@@ -102,13 +92,23 @@ public class GeneralService {
     }
 
     public String Request(Request request_income){
-
-
         long trxConfirm = (long)(rand.nextDouble()*1000000000000000L);
         log.info("this random x {}",String.valueOf(trxConfirm));
-
-
         return String.valueOf(trxConfirm);
-
     }
+
+    public void readfile() {
+
+            JsonParser parser = new JsonParser();
+            try {
+                Object obj = parser.parse(new FileReader("D:/Payment gateway/Nobu-indomaret/file/CSH7194812.json"));
+
+//                JSONObject jsonObject = (JSONObject) obj;
+                log.info("this json {}",obj);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 }

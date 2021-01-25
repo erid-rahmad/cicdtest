@@ -21,6 +21,14 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: default
+logging:
+  file: logs/application-debug.log
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"
+    file: "%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"
+  level:
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
 
 #logging:
 #  level:
@@ -35,11 +43,13 @@ spring:
 #    file: "%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"
 #  file:
 #    name: ${LOG_LOCATION:./logs/transaction.log}
-logging:
-  file: logs/application-debug.log
-  pattern:
-    console: "%d %-5level %logger : %msg%n"
-    file: "%d %-5level [%thread] %logger : %msg%n"
-  level:
-    org.springframework.web: ERROR
-    org.hibernate: ERROR
+
+#logging:
+#  file: logs/application-debug.log
+#  pattern:
+#    console: "%d %-5level %logger : %msg%n"
+#    file: "%d %-5level [%thread] %logger : %msg%n"
+#  level:
+#    org.springframework.web: ERROR
+#    org.hibernate: ERROR
+

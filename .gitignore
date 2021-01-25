@@ -40,3 +40,5 @@ secrets.yml
 .sts4-cache
 
 /logs/application-debug.log
+/file/json_array_output.json
+/logs/

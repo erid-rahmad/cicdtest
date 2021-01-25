@@ -18,12 +18,15 @@ package sample.actuator.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sample.actuator.model.Request;
 import sample.actuator.model.Response;
 import sample.actuator.service.GeneralService;
 import sample.actuator.utils.MapperJSONUtil;
+
+import java.awt.*;
 
 @Controller
 @RequestMapping("api/v1")
@@ -33,10 +36,10 @@ public class ReqController {
 	@Autowired
 	GeneralService generalService;
 
-	@PostMapping(value = "/cashout")
+	@PostMapping(value = "/cashout",produces = "application/json")
 	@ResponseBody
 	public Response response(@RequestBody Request request1) {
-		log.info("this req {}",MapperJSONUtil.prettyLog(request1));
+		log.info("incoming {}",MapperJSONUtil.prettyLog(request1));
 		return generalService.general(request1);
 	}
 
