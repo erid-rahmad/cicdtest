@@ -1,3 +1,9 @@
+kafka:
+  boot:
+    server: localhost:9092
+  topic:
+    name: tes
+
 server:
   port: 8080
 #  ssl:

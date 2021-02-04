@@ -15,6 +15,7 @@ import sample.actuator.model.ResponseDetails;
 
 import javax.persistence.EntityManager;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.Random;
@@ -48,10 +49,6 @@ public class GeneralService {
         response.setProducttype(request_income.getProducttype());
         response.setTrxtype(request_income.getTrxtype());
 
-        readfile();
-
-
-
         if(request_income.getTrxtype().contains("CASHOUT")){
             RequestDetails requestDetails = reqDetailJpa.findBytoken(request_income.getRequestDetails()
                     .getToken());
@@ -69,6 +66,9 @@ public class GeneralService {
                 response.setResponseDetails(responseDetails);
                 response.setRespondetail("succes");
                 response.setResponcode("00");
+
+                readfile(request_income.getRequestDetails().getToken());
+
             }else {
                 ResponseDetails responseDetails = new ResponseDetails();
                 responseDetails.setTrxconfirm(null);
@@ -97,18 +97,19 @@ public class GeneralService {
         return String.valueOf(trxConfirm);
     }
 
-    public void readfile() {
-
-            JsonParser parser = new JsonParser();
+    public void readfile(String token) {
+        String loc = "D:/Payment gateway/Nobu-indomaret/file/"+token+".json";
+        JsonParser parser = new JsonParser();
             try {
-                Object obj = parser.parse(new FileReader("D:/Payment gateway/Nobu-indomaret/file/CSH7194812.json"));
+                FileReader tes = new FileReader(loc);
+                Object obj = parser.parse(tes);
+                tes.close();
 
-//                JSONObject jsonObject = (JSONObject) obj;
                 log.info("this json {}",obj);
-
+                File file = new File(loc);
+                file.delete();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-
+    }
 }

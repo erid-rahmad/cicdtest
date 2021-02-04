@@ -2,7 +2,6 @@ package sample.actuator.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,6 @@ import sample.actuator.model.Token;
 import javax.persistence.EntityManager;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Random;
 
 @Service
@@ -46,7 +43,6 @@ public class TokenService {
         JSONObject jsonObject = new JSONObject();
 
         String loc = "D:/Payment gateway/Nobu-indomaret/file/"+thistoken+".json";
-
 
         try {
             jsonObject.put("CSH"+String.valueOf(trxConfirm),"CSH"+String.valueOf(trxConfirm));

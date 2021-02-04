@@ -42,3 +42,4 @@ secrets.yml
 /logs/application-debug.log
 /file/json_array_output.json
 /logs/
+/file/
