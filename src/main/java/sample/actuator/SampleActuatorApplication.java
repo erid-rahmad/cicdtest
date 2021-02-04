@@ -40,7 +40,7 @@ public class SampleActuatorApplication {
 
 	@Bean
 	public HealthIndicator helloHealthIndicator() {
-		log.info("this {}",tokenService.generatetoken());
+		log.info("this {}",tokenService.generatetoken("123"));
 		return new HealthIndicator() {
 			@Override
 			public Health health() {

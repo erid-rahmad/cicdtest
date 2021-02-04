@@ -19,10 +19,11 @@ public class TokenController {
     @Autowired
     TokenService tokenService;
 
-    @GetMapping(value = "/token")
+    @PostMapping(value = "/token")
     @ResponseBody
-    public Token gettoken() {
-        Token token = tokenService.generatetoken();
+    public Token gettoken(@RequestBody Token token1) {
+        log.info(token1.getNorek());
+        Token token = tokenService.generatetoken(token1.getNorek());
         return token;
     }
 }

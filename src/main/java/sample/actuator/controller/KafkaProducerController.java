@@ -20,7 +20,7 @@ public class KafkaProducerController {
 	@PostMapping
 	public ResponseEntity<String> sendData(){
 		Request set = new Request(null,"asd","asd","asd","asd","asd","asd","asd","asd");
-		sender.sendData(set);
+//		sender.sendData(set);
 		return new ResponseEntity<>("Data sent to Kafka", HttpStatus.OK);
 	}
 }

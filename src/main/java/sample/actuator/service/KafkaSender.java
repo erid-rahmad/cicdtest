@@ -24,13 +24,14 @@ public class KafkaSender {
 	@Value("${kafka.topic.name}")
 	private String topicName;
 
-	public void sendData(Request student) {
+	public void sendData(String msg) {
 		// TODO Auto-generated method stub
 		Map<String, Object> headers = new HashMap<>();
-		headers.put(KafkaHeaders.TOPIC, topicName);
-		kafkaTemplate.send(new GenericMessage<Request>(student, headers));
+//		headers.put(KafkaHeaders.TOPIC, topicName);
+//		kafkaTemplate.send(new GenericMessage<Request>(student, headers));
+		kafkaTemplate.send(topicName,msg);
 		// use the below to send String values through kafka
 		// kafkaTemplate.send(topicName, "some string value")
-		LOGGER.info("Data - " + student.toString() + " sent to Kafka Topic - " + topicName);
+		LOGGER.info("Data - " + msg + " sent to Kafka Topic - " + topicName);
 	}
 }

@@ -13,6 +13,12 @@ import sample.actuator.model.Token;
 import javax.persistence.EntityManager;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -25,7 +31,7 @@ public class TokenService {
     EntityManager em;
 
     @Transactional
-    public Token generatetoken(){
+    public Token generatetoken(String norek){
         Token token = new Token();
         RequestDetails requestDetails = new RequestDetails();
         Request request = new Request();
@@ -34,6 +40,7 @@ public class TokenService {
         log.info("this random x {}",String.valueOf(trxConfirm));
         String thistoken = "CSH"+String.valueOf(trxConfirm);
         token.setToken(thistoken);
+        token.setNorek(norek);
         requestDetails.setToken(thistoken);
         em.persist(requestDetails);
 
@@ -45,7 +52,13 @@ public class TokenService {
         String loc = "D:/Payment gateway/Nobu-indomaret/file/"+thistoken+".json";
 
         try {
-            jsonObject.put("CSH"+String.valueOf(trxConfirm),"CSH"+String.valueOf(trxConfirm));
+            jsonObject.put("token","CSH"+String.valueOf(trxConfirm));
+            jsonObject.put("norek",norek);
+//            String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            String formatDateTime = LocalDateTime.now().plusMinutes(15).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            jsonObject.put("time",formatDateTime);
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

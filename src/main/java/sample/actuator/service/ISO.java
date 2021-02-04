@@ -8,8 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.jpos.iso.ISOException;
 
 @Slf4j
+@org.springframework.stereotype.Service
 public class ISO {
-    public String packToIso() {
+    public String packToIso(String mti,String bit48) {
         String result = null;
         org.jpos.iso.packager.GenericPackager genericPkg;
         org.jpos.iso.ISOMsg isoMsg;
@@ -18,7 +19,7 @@ public class ISO {
             isoMsg = new org.jpos.iso.ISOMsg();
             isoMsg.setPackager(genericPkg);
 
-            isoMsg.setMTI("0200"); //request financial transaction
+            isoMsg.setMTI(mti); //request financial transaction
             isoMsg.set(3, "123456");
             isoMsg.set(4, "300000");
             String formattedDate = new java.text.SimpleDateFormat("MMddhhmmss").format(new Date());
@@ -30,7 +31,7 @@ public class ISO {
             isoMsg.set(37, "1234567890AB");
             isoMsg.set(41, "CAT12345");
             isoMsg.set(42, "MERCHANT1234567");
-            isoMsg.set(48, "000");
+            isoMsg.set(48, bit48);
             isoMsg.set(63, "020010023110030001");
             byte[] isoMsgByte = isoMsg.pack();
             result = new String(isoMsgByte);
