@@ -36,6 +36,7 @@ public class SampleActuatorApplication {
 	private TokenService tokenService;
 	public static void main(String[] args) {
 		SpringApplication.run(SampleActuatorApplication.class, args);
+
 	}
 
 	@Bean

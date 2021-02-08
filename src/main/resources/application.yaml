@@ -1,8 +1,17 @@
 kafka:
+  consumer:
+    group:
+      id: tes
   boot:
     server: localhost:9092
   topic:
-    name: tes
+    grup: tes
+    consume:
+      name: tes1
+    produce:
+      name: tes
+
+
 
 server:
   port: 8080

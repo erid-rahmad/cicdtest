@@ -61,15 +61,16 @@ public class GeneralService {
                 response.setRespondetail("succes");
                 response.setResponcode("00");
                 sender.sendData(iso.packToIso("0200",trxconfirm));
-
             }else {
                 ResponseDetails responseDetails = new ResponseDetails();
                 responseDetails.setTrxconfirm(null);
                 response.setResponseDetails(responseDetails);
+
                 response.setRespondetail("gagal");
                 response.setResponcode("05");
             }
         }else if(request_income.getTrxtype().contains("REVERSAL")){
+            sender.sendData(iso.packToIso("0200","trxconfirm"));
             response.setRespondetail("succes ");
             response.setResponcode("00");
         }else if(request_income.getTrxtype().contains("NOTIFICATION")){
