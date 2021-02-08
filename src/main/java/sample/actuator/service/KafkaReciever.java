@@ -15,8 +15,8 @@ import java.util.Map;
 @Slf4j
 public class KafkaReciever {
 
-	@Autowired
-	RestTemplate restTemplate;
+//	@Autowired
+//	RestTemplate restTemplate;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(KafkaReciever.class);
 
@@ -25,11 +25,7 @@ public class KafkaReciever {
 		Map<String,Object> bls = new HashMap<>();
 		Map<String,Object> tossti = new HashMap<>();
 		log.info("This From Kafka {}",student);
-		bls=restTemplate.postForObject("urlinq",tossti, Map.class);
-
-
-
-
+//		bls=restTemplate.postForObject("urlinq",tossti, Map.class);
 
 	}
 }

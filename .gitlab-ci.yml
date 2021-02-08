@@ -1,0 +1,37 @@
+services:
+  - docker:19.03.7-dind
+
+stages:
+  - build jar
+  - build and push docker image
+  - deploy
+
+build:
+  image: maven:3.6.3-jdk-11-slim
+  stage: build jar
+#  before_script:
+#    - source .${CI_COMMIT_REF_NAME}.env
+  script:
+    - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
+  artifacts:
+    paths:
+      - target/*.jar
+
+docker build:
+  image: docker:stable
+  stage: build and push docker image
+#  before_script:
+#    - source .${CI_COMMIT_REF_NAME}.env --build-arg SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE -t $DOCKER_REPO
+  script:
+    - docker build -t registry.gitlab.com/erid.rahmad/nobu .
+    - docker login registry.gitlab.com -u erid.rahmad -p ILIXEjamilah123
+    - docker push registry.gitlab.com/erid.rahmad/nobu
+
+deploy_project:
+  stage: deploy
+  script:
+    - docker login registry.gitlab.com -u erid.rahmad -p ILIXEjamilah123
+    - docker pull registry.gitlab.com/erid.rahmad/nobu
+    - docker run registry.gitlab.com/erid.rahmad/nobu
+  tags:
+    - deploy
