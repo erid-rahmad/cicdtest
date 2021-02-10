@@ -16,22 +16,25 @@ build:
   artifacts:
     paths:
       - target/*.jar
+      - target/classes
 
 docker build:
   image: docker:stable
   stage: build and push docker image
 #  before_script:
-#    - source .${CI_COMMIT_REF_NAME}.env --build-arg SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE -t $DOCKER_REPO
+#    - source .${CI_COMMIT_REF_NAME}.env --build-arg SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE -t $DOCKER_REPO//
   script:
     - docker build -t registry.gitlab.com/erid.rahmad/nobu .
-    - docker login registry.gitlab.com -u erid.rahmad -p ILIXEjamilah123
+    - docker login registry.gitlab.com -u erid.rahmad -p gitlabpassword
     - docker push registry.gitlab.com/erid.rahmad/nobu
 
 deploy_project:
   stage: deploy
   script:
-    - docker login registry.gitlab.com -u erid.rahmad -p ILIXEjamilah123
+    - docker login -u erid.rahmad -p gitlabpassword registry.gitlab.com
     - docker pull registry.gitlab.com/erid.rahmad/nobu
-    - docker run registry.gitlab.com/erid.rahmad/nobu
+    - docker stop nobuserviceindomaret
+    - docker rm nobuserviceindomaret
+    - docker run -d --name nobuserviceindomaret --net=host --restart=always -p 8101:8101 registry.gitlab.com/erid.rahmad/nobu
   tags:
     - deploy

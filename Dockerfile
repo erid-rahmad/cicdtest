@@ -16,14 +16,13 @@
 #
 #HEALTHCHECK --interval=1m --timeout=3s CMD wget -q -T 3 -s http://localhost:8080/actuator/health/ || exit 1
 
-
 FROM openjdk:8
-EXPOSE 8100 8102
+EXPOSE 8101
 
 RUN mkdir logs
 RUN mkdir config
 COPY "/target/spring-boot-application.jar" "/app/spring-boot-application.jar"
-#COPY "/target/classes/application.yaml" "/config/application.yaml"
+COPY "/target/classes/application.yaml" "/config/application.yaml"
 ENTRYPOINT ["java","-jar","/app/spring-boot-application.jar"]
 
 

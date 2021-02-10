@@ -14,7 +14,7 @@ kafka:
 
 
 server:
-  port: 8080
+  port: 8101
 #  ssl:
 #    key-store-type: PKCS12
 #    enabled: false
