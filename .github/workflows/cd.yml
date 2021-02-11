@@ -32,7 +32,7 @@ jobs:
 #           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: root
-#           TARGET: /root
+          TARGET: /root
           scrip: |
             java
             
