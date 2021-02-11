@@ -31,8 +31,8 @@ jobs:
           ARGS: "-rltgoDzvO"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: /HOME/centos
+          REMOTE_USER: erid
+          TARGET: /HOME/erid
           scrip: |
             java
             
