@@ -32,7 +32,7 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.HOST }}
+          TARGET: /HOME/centos
           scrip: |
             java
             
