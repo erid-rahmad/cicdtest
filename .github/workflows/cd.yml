@@ -16,7 +16,7 @@ jobs:
           password: multipolar123
           script: |
             cd /home/nobuservice/cicdtest
-            mvn install        
+            mvn clean install        
             
       - name: Push to server1
         uses: appleboy/ssh-action@master
