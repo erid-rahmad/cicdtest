@@ -23,7 +23,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Run a command remotely
-      uses: docker://evaneos/ssh-action:0.1.0
+#       uses: docker://evaneos/ssh-action:0.1.0
       with:
         hosts: 188.166.255.175
         user: root
