@@ -12,6 +12,6 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 188.166.255.175
-          username: erid
-          password: erid
+          username: root
+#           password: erid
           script: java
