@@ -39,7 +39,7 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: 188.166.255.175
           REMOTE_USER: root
-          TARGET: /root
+#           TARGET: /root
           port: 22 
           scrip: |
             java
