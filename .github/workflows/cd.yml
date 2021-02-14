@@ -15,5 +15,5 @@ jobs:
           username: coba
           password: multipolar123
           script: |
-            cd /home/nobuservice
+            cd /home/nobuservice/cicdtest
             mvn install
