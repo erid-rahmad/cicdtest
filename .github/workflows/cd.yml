@@ -30,7 +30,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           ARGS: "-rltgoDzvO"
 #           SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_HOST: 188.166.255.175
           REMOTE_USER: root
           TARGET: /root
           port: 22 
