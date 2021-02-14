@@ -16,6 +16,26 @@ jobs:
           password: multipolar123
           script: |
             cd /home/nobuservice/cicdtest
+            mvn install        
+            
+      - name: Push to server1
+        uses: appleboy/ssh-action@master
+        with:
+          host: 188.166.255.175
+          username: coba
+          password: multipolar123
+          script: |
+            cd /home/nobuservice/cicdtest
             mvn install
             docker build -t nobuservicebygithubaction .
-            docker run -d --name nobuserviceindomaret --net=host --restart=always -p 8101:8101 nobuservicebygithubaction
+            
+      - name: Push to server1
+        uses: appleboy/ssh-action@master
+        with:
+          host: 188.166.255.175
+          username: coba
+          password: multipolar123
+          script: |
+            cd /home/nobuservice/cicdtest            
+            docker run -d --name nobuserviceindomaret --net=host --restart=always -p 8101:8101 registry.gitlab.com/erid.rahmad/nobu
+    
