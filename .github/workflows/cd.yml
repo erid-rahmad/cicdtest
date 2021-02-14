@@ -17,3 +17,5 @@ jobs:
           script: |
             cd /home/nobuservice/cicdtest
             mvn install
+            docker build -t nobuservicebygithubaction .
+            docker run -d --name nobuserviceindomaret --net=host --restart=always -p 8101:8101 nobuservicebygithubaction
