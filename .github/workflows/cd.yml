@@ -22,27 +22,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v1
-    - name: Install Node.js
-      uses: actions/setup-node@v1
+    - name: Run a command remotely
+      uses: docker://evaneos/ssh-action:0.1.0
       with:
-        node-version: '10.x'
-    - name: Install npm dependencies
-      run: npm install
-#     - name: Run build task
-#       run: npm run build --if-present
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v2.1.5
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: 188.166.255.175
-          REMOTE_USER: root
-#           TARGET: /root
-          port: 22 
-          scrip: |
-            java
+        hosts: 188.166.255.175
+        user: root
+        private_key: ${{ secrets.PRIVATE_KEY }}
+#         knock_sequence: ${{ secrets.KNOCK_SEQUENCE }}
+        commands: echo "Hello world!"
             
 
 
