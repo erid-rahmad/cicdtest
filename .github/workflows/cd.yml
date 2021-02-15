@@ -16,7 +16,7 @@ jobs:
           password: multipolar123
           script: |
             cd /home/nobuservice/cicdtest
-            git pull https://github.com/erid-rahmad/cicdtest.git
+            sudo git pull https://github.com/erid-rahmad/cicdtest.git
         
       - name: Push to server
         uses: appleboy/ssh-action@master
