@@ -37,5 +37,5 @@ jobs:
 
           script: |
             cd /home/nobuservice/cicdtest            
-            docker run -d --name nobuserviceindomaret --net=host --restart=always -p 8101:8101 registry.gitlab.com/erid.rahmad/nobu
+            docker run -d --name nobuserviceindomaretwithgitaction --net=host --restart=always -p 8101:8101 registry.gitlab.com/erid.rahmad/nobu
     
