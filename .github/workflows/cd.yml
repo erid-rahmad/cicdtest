@@ -25,8 +25,7 @@ jobs:
           username: coba
           password: multipolar123
           script: |
-            cd /home/nobuservice/cicdtest
-            mvn install
+            cd /home/nobuservice/cicdtest            
             docker build -t nobuservicebygithubaction .
             
       - name: Push to server1
