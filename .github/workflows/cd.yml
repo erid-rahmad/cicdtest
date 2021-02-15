@@ -15,7 +15,8 @@ jobs:
           username: coba
           password: multipolar123
           script: |
-            cd /home/nobuservice/cicdtest            
+            cd /home/nobuservice/cicdtest  
+            sudo su          
             git pull https://github.com/erid-rahmad/cicdtest.git
         
       - name: Push to server
