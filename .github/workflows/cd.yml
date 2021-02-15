@@ -8,6 +8,16 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
+      - name: Push to server1
+        uses: appleboy/ssh-action@master
+        with:
+          host: 188.166.255.175
+          username: coba
+          password: multipolar123
+          script: |
+            cd /home/nobuservice/cicdtest            
+            git pull https://github.com/erid-rahmad/cicdtest.git
+        
       - name: Push to server
         uses: appleboy/ssh-action@master
         with:
@@ -17,6 +27,17 @@ jobs:
           script: |
             cd /home/nobuservice/cicdtest
             mvn clean install        
+      
+      - name: Push to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 188.166.255.175
+          username: coba
+          password: multipolar123      
+          script: |
+            cd /home/nobuservice/cicdtest
+            docker stop nobuserviceindomaretwithgitaction
+            docker rm nobuserviceindomaretwithgitaction
             
       - name: Push to server1
         uses: appleboy/ssh-action@master
